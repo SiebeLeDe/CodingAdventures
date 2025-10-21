@@ -9,20 +9,20 @@ class ThreeDSurfacePlot(mm.ThreeDScene):
         resolution_fa = 40
         self.set_camera_orientation(phi=75 * mm.DEGREES, theta=-30 * mm.DEGREES)
 
-        def param_gauss(u, v):
+        def param_particle_in_box(u, v):
+            nx, ny = 1, 1  # Quantum numbers
+            width, length = 2, 2  # Dimensions of the box
             x = u
             y = v
-            sigma, mu = 0.4, [0.0, 0.0]
-            d = np.linalg.norm(np.array([x - mu[0], y - mu[1]]))
-            z = np.exp(-(d**2 / (2.0 * sigma**2)))
+            z = np.sin(nx * np.pi * x / width) * np.sin(ny * np.pi * y / length)
             return np.array([x, y, z])
 
-        gauss_plane = mm.Surface(param_gauss, resolution=(resolution_fa, resolution_fa), v_range=[-2, +2], u_range=[-2, +2])
+        particle_box_surface = mm.Surface(param_particle_in_box, resolution=(resolution_fa, resolution_fa), v_range=[0, 2], u_range=[0, 2])
 
-        gauss_plane.scale(2, about_point=mm.ORIGIN)
-        gauss_plane.set_style(fill_opacity=1, stroke_color=mm.GREEN)
-        gauss_plane.set_fill_by_checkerboard([mm.ORANGE, mm.BLUE], opacity=0.5)
-        axes = mm.ThreeDAxes()
-        self.begin_ambient_camera_rotation(rate=0.3)
-        self.add(axes, gauss_plane)
+        particle_box_surface.scale(2, about_point=mm.ORIGIN)
+        particle_box_surface.set_style(fill_opacity=1, stroke_color=mm.GREEN)
+        particle_box_surface.set_fill_by_checkerboard([mm.ORANGE, mm.BLUE], opacity=0.5)
+        axes = mm.ThreeDAxes(x_range=[0, 1, 0.2], y_range=[0, 1, 0.2])
+        self.begin_ambient_camera_rotation(rate=0.7)
+        self.add(axes, particle_box_surface)
         self.wait(3)
