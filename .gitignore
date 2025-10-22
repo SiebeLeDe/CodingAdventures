@@ -13,3 +13,6 @@ wheels/
 media/
 logs/
 .cache/
+
+# MacOS related
+.DS_Store
