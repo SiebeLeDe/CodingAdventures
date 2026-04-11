@@ -1,0 +1,47 @@
+[project]
+name = "ams-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "plams[all]",
+    "scm-amspipe",
+    "scm-base",
+    "scm-input-classes",
+    "scm-pisa",
+    "scm-akfreader",
+    # "scm-conformers",
+    # "scm-flexmd",
+    # "scm-version",
+    # "scm-kpath",
+    # "scm-xlsx",
+    # "scm-external-engines",
+    # "scm-glompo[all]",
+    # "scm-params",
+    # "scm-reactmap",
+    # "scm-utils",
+]
+
+[tool.uv.sources]
+plams = { index = "scm" }
+scm-amspipe = { index = "scm" }
+scm-base = { index = "scm" }
+scm-input-classes = { index = "scm" }
+scm-pisa = { index = "scm" }
+scm-akfreader = { index = "scm" }
+# scm-conformers = { index = "scm" }
+# scm-flexmd = { index = "scm" }
+# scm-version = { index = "scm" }
+# scm-kpath = { index = "scm" }
+# scm-xlsx = { index = "scm" }
+# scm-external-engines = { index = "scm" }
+# scm-glompo = { index = "scm" }
+# scm-params = { index = "scm" }
+# scm-reactmap = { index = "scm" }
+# scm-utils = { index = "scm" }
+
+[[tool.uv.index]]
+name = "scm"
+url = "https://downloads.scm.com/Downloads/packages/uv/channels/2026.1/simple/"
+explicit = true
