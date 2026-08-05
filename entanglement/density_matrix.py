@@ -49,15 +49,20 @@ def main():
 
     # Mixed state using basis {up, down} for both observers Alice and Bob
     # # |                               uu>, |ud>, |du>, |dd>
-    mixed_state_coefficients = np.array([0.0, np.sqrt(0.5), np.sqrt(0.5), 0.0])
+    states: list[np.ndarray] = []
+    states.append(np.array([0.0, np.sqrt(0.5), np.sqrt(0.5), 0.0]))
+    states.append(np.array([np.sqrt(0.5), 0.0, 0.0, np.sqrt(0.5)]))
+    states.append(np.array([3 / 5, 0.0, 4 / 5, 0.0]))
 
-    print("Mixed State Coefficients:", mixed_state_coefficients)
+    for i, state in enumerate(states):
+        print(f"\n=====State {i + 1}: {state}=====")
+        print("Coefficients:", state)
 
-    density_matrix = calculate_density_matrix(mixed_state_coefficients)
-    print("Density Matrix:")
-    print(density_matrix)
-    state_type = determine_state_properties(density_matrix)
-    print("State Type:", state_type)
+        density_matrix = calculate_density_matrix(state)
+        print("Density Matrix:")
+        print(density_matrix)
+        state_type = determine_state_properties(density_matrix)
+        print("State Type:", state_type)
 
 
 if __name__ == "__main__":
