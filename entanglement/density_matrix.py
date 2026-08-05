@@ -55,7 +55,7 @@ def main():
     states.append(np.array([3 / 5, 0.0, 4 / 5, 0.0]))
 
     for i, state in enumerate(states):
-        print(f"\n=====State {i + 1}: {state}=====")
+        print(f"\n=====State {i + 1}=====")
         print("Coefficients:", state)
 
         density_matrix = calculate_density_matrix(state)
