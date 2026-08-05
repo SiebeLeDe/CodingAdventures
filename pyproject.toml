@@ -4,10 +4,13 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "numpy>=2.3.4",
+]
 
 [tool.uv.workspace]
 members = [
     "manim_chem",
     "bayesian-optimization",
+    "web-scraper",
 ]
