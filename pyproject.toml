@@ -13,4 +13,5 @@ members = [
     "manim_chem",
     "bayesian-optimization",
     "web-scraper",
+    "sunrise",
 ]
