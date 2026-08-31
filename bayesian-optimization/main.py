@@ -39,17 +39,18 @@ def plot_objective_function(x: npt.NDArray[np.float64], y: npt.NDArray[np.float6
 
 def surrogate(regressor: GaussianProcessRegressor, X: npt.NDArray[np.float64]) -> tuple[npt.NDArray, npt.NDArray]:
     with catch_warnings():
-        simplefilter("ignore")
+        # simplefilter("ignore")
         return regressor.predict(X, return_std=True)  # type: ignore[datatype]
 
 
 def plot_surrogate(regressor: GaussianProcessRegressor, X: npt.NDArray[np.float64], y: npt.NDArray[np.float64], y_with_noise: npt.NDArray[np.float64]) -> None:
     y_pred, y_std = surrogate(regressor, X)
     fig, axs = plot.subplots()
+    y_std *= 10000
     plot.plot(X, y, label="Objective Function", color="Green")
     plot.scatter(X, y_with_noise, label="Objective Function (with noise)", color="orange")
     plot.plot(X, y_pred, label="Surrogate Model", linestyle="dotted", color="cyan")
-    plot.fill_between(X.flatten(), (y_pred - 1.96 * y_std).flatten(), (y_pred + 1.96 * y_std).flatten(), color="cyan", alpha=0.2, label="95% Confidence Interval")
+    plot.fill_between(X.flatten(), (y_pred - 1.95 * y_std), (y_pred + 1.95 * y_std), alpha=0.7, label="95% Confidence Interval")
     plot.legend()
     plot.show()
     plot.close()
