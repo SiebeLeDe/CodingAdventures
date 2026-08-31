@@ -1,7 +1,7 @@
 import pathlib as pl
 from dataclasses import dataclass
 import random
-from collections.abc import Sequence
+from collections.abc import Sequence, MutableSequence
 from datetime import datetime, timedelta
 
 
@@ -33,7 +33,7 @@ def generate_training_dates(start_date: str, end_date: str, interval_days: int) 
     return dates
 
 
-def shuffle_team_members(team_members):
+def shuffle_team_members(team_members: MutableSequence[Player]) -> None:
     """Shuffle the list of team members in place."""
     random.shuffle(team_members)
 
@@ -70,7 +70,6 @@ def generate_training_schedule(team_members: Sequence[Player], start_date: str, 
     """
     skip_dates = ["2026-09-09"]
     skip_periods = [("2026-12-12", "2027-01-12")]
-    shuffle_team_members(team_members)
     dates = generate_training_dates(start_date, end_date, interval_days)
     schedule = {}
     for i, date in enumerate(dates):
@@ -94,9 +93,10 @@ def main():
 
     # print(f"Loading team members from: {team_members_file}")
     team_members = load_team_members(team_members_file)
-    # print("Team Members:")
-    # for member in team_members:
-    #     print(f"- {member.first_name} {member.family_name}")
+    shuffle_team_members(team_members)
+
+    with open(parent_dir / "spelerslijst-random.txt", "w") as file:
+        file.writelines(f"{member.first_name} {member.family_name}\n" for member in team_members)
 
     # For training schedule generation
     start_date = "2026-09-02"
@@ -108,12 +108,12 @@ def main():
     for date, member in training_schedule.items():
         print(f"- {date}: {member}")
 
-    training_schedule_file = parent_dir / "2026_2027-SPM4-trainingsschema.csv"
-    # Save the training schedule to a CSV file
-    with open(training_schedule_file, "w") as file:
-        file.write("Datum,Naam\n")
-        for date, member in training_schedule.items():
-            file.write(f"{date},{member.first_name}\n")
+    # training_schedule_file = parent_dir / "2026_2027-SPM4-trainingsschema.csv"
+    # # Save the training schedule to a CSV file
+    # with open(training_schedule_file, "w") as file:
+    #     file.write("Datum,Naam\n")
+    #     for date, member in training_schedule.items():
+    #         file.write(f"{date},{member.first_name}\n")
 
 
 if __name__ == "__main__":
