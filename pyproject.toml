@@ -14,4 +14,5 @@ members = [
     "bayesian-optimization",
     "web-scraper",
     "sunrise",
+    "sporting-martinus",
 ]
