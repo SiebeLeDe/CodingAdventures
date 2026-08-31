@@ -7,7 +7,6 @@ Sybren Groot
 Stijn Helmer
 Max Holtes
 Siebe Lekanne Deprez
-Louk Metkemeijer
 Xavier Metzelaar
 Roland Peters
 Hendrik Schuurman
