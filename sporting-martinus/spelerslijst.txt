@@ -8,6 +8,7 @@ Stijn Helmer
 Max Holtes
 Siebe Lekanne Deprez
 Xavier Metzelaar
+Paul Niemoller
 Roland Peters
 Hendrik Schuurman
 Roy Spithoven
